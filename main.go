@@ -6,12 +6,12 @@ import (
 	"strconv"
 	"time"
 
+	"charm.land/bubbles/v2/help"
 	"charm.land/bubbles/v2/key"
 	"charm.land/bubbles/v2/table"
-	"charm.land/bubbles/v2/help"
 	tea "charm.land/bubbletea/v2"
 	"charm.land/lipgloss/v2"
-	"example.com/m/v2/pkg"
+	"github.com/Desmond123-arch/Evict/pkg"
 )
 
 var baseStyle = lipgloss.NewStyle().BorderStyle(lipgloss.NormalBorder()).BorderForeground(lipgloss.Color("240")).BorderBottom(false)
@@ -153,10 +153,10 @@ func main() {
 	t.SetStyles(s)
 
 	m := model{
-		table: t,
+		table:     t,
 		processes: processes,
-		keys: KeyMaps(),
-		help: help.New(),
+		keys:      KeyMaps(),
+		help:      help.New(),
 	}
 	if _, err := tea.NewProgram(m).Run(); err != nil {
 		fmt.Println("Error running program:", err)
