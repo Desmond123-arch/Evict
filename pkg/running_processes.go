@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// GET the running proceses
+// GetRunningProcesses returns the running proceses
 func GetRunningProcesses() ([]RunningProcess, error) {
 	res := make([]RunningProcess, 0)
 	args := "-i -P -n"
@@ -22,8 +22,14 @@ func GetRunningProcesses() ([]RunningProcess, error) {
 	scanner.Scan()
 	for scanner.Scan() {
 		m := strings.Fields(scanner.Text())
-		device, _ := strconv.Atoi(m[5])
-		port, _ := strconv.Atoi((strings.Split(strings.Split(m[8], " ")[0], ":"))[1])
+		device := -1
+		port := -1
+		if len(m) > 5 {
+			device, _ = strconv.Atoi(m[5])
+		}
+		if len(m) > 8 {
+			port, _ = strconv.Atoi((strings.Split(strings.Split(m[8], " ")[0], ":"))[1])
+		}
 		process := RunningProcess{
 			COMMAND: m[0],
 			PID:     m[1],

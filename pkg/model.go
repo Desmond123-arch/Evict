@@ -28,7 +28,6 @@ func (process RunningProcess) KillProcess() error {
 	if err != nil {
 		return err
 	}
-	fmt.Printf(cmd.String())
 	if err := cmd.Start(); err != nil {
 		return err
 	}
